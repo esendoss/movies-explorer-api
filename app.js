@@ -3,6 +3,7 @@ const { errors } = require('celebrate');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const helmet = require('helmet');
+const cors = require('cors');
 
 const { createUser, login } = require('./controllers/user');
 const auth = require('./middlewares/auth');
@@ -27,6 +28,14 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 app.post('/signup', validateRegister, createUser);
 app.post('/signin', validateLogin, login);
+
+app.use(cors({
+  origin: [
+    'http://localhost:3010',
+    'https://api.movies-esendoss.nomoredomains.icu',
+    'https://movies-esendoss.nomoredomains.icu',
+  ],
+}));
 
 mongoose.connect(NODE_ENV === 'production' ? BASE_URL : 'mongodb://127.0.0.1:27017/moviesdb', { useNewUrlParser: true });
 
