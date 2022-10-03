@@ -1,5 +1,7 @@
 require('dotenv').config();
 
+console.log(process.env.NODE_ENV);
+
 const express = require('express');
 const { errors } = require('celebrate');
 const mongoose = require('mongoose');
@@ -17,7 +19,7 @@ const userRouter = require('./routes/user');
 const movieRouter = require('./routes/movie');
 const wayRouter = require('./routes/wrongway');
 
-const { PORT = 3000 } = process.env;
+const { PORT = 3010 } = process.env;
 const { MONGO_URL = 'mongodb://127.0.0.1:27017/moviesdb' } = process.env;
 
 const app = express();
