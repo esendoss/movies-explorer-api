@@ -17,7 +17,8 @@ const userRouter = require('./routes/user');
 const movieRouter = require('./routes/movie');
 const wayRouter = require('./routes/wrongway');
 
-const { PORT = 3000, NODE_ENV, BASE_URL } = process.env;
+const { PORT = 3000 } = process.env;
+const { MONGO_URL = 'mongodb://127.0.0.1:27017/moviesdb' } = process.env;
 
 const app = express();
 
@@ -39,7 +40,7 @@ app.use(cors({
   ],
 }));
 
-mongoose.connect(NODE_ENV === 'production' ? BASE_URL : 'mongodb://127.0.0.1:27017/moviesdb', { useNewUrlParser: true });
+mongoose.connect(MONGO_URL, { useNewUrlParser: true });
 
 app.use(auth);
 
