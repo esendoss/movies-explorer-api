@@ -8,6 +8,7 @@ const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const helmet = require('helmet');
 const cors = require('cors');
+const rateLimiter = require('./middlewares/rateLimiter');
 
 const routes = require('./routes');
 const { centralError } = require('./middlewares/centralError');
@@ -20,7 +21,7 @@ const app = express();
 
 app.use(requestLogger);
 
-// подключить ограничитель запросов rateLimiter
+app.use(rateLimiter);
 
 app.use(helmet());
 
