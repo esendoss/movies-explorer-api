@@ -33,7 +33,7 @@ const movieSchema = new mongoose.Schema({
   trailerLink: {
     type: String,
     required: true,
-    vvalidate: {
+    validate: {
       validator: (v) => isURL(v, { required_protocol: true }),
       message: 'Неправильный формат URL',
     },

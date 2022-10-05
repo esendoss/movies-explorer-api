@@ -33,6 +33,8 @@ module.exports.updateUser = (req, res, next) => {
     .catch((err) => {
       if (err.name === 'ValidationError') {
         next(new UncorrectError('Некорректный id'));
+      } else if (err.code === 11000) {
+        next(new EmailError('Пользователь с данным email уже существует'));
       } else {
         next(err);
       }
@@ -58,7 +60,7 @@ module.exports.createUser = (req, res, next) => {
       if (err.name === 'ValidationError') {
         next(new UncorrectError('Некорректные данные при создании пользователя'));
       } else if (err.code === 11000) {
-        next(new EmailError({ message: 'err.errMessage' }));
+        next(new EmailError('Пользователь с данным email уже существует'));
       } else {
         next(err);
       }

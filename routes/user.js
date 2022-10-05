@@ -10,8 +10,8 @@ const {
 } = require('../controllers/user');
 
 // возвращает информацию о пользователе (email и имя)
-userRouter.get('/users/me', auth, getUser);
+userRouter.get('/me', auth, getUser);
 // обновляет информацию о пользователе (email и имя)
-userRouter.patch('/users/me', auth, validateUser, updateUser);
+userRouter.patch('/me', auth, validateUser, updateUser);
 
 module.exports = userRouter;
