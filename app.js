@@ -28,15 +28,35 @@ app.use(helmet());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-app.use(cors({
+const options = {
   origin: [
     'http://localhost:3010',
+    'http://localhost:3000',
     'https://api.movies-esendoss.nomoredomains.icu',
     'https://movies-esendoss.nomoredomains.icu',
   ],
+  methods: ['GET', 'HEAD', 'PUT', 'PATCH', 'POST', 'DELETE'],
+  preflightContinue: false,
+  optionsSuccessStatus: 204,
+  allowedHeaders: ['Content-Type', 'origin', 'Authorization'],
+};
+/*
+app.use(cors({
+  origin: [
+    'http://localhost:3010',
+    'http://localhost:3000',
+    'https://api.movies-esendoss.nomoredomains.icu',
+    'https://movies-esendoss.nomoredomains.icu',
+  ],
+  methods: ['GET', 'HEAD', 'PUT', 'PATCH', 'POST', 'DELETE'],
+  preflightContinue: false,
+  optionsSuccessStatus: 204,
+  allowedHeaders: ['Content-Type', 'origin', 'Authorization'],
 }));
-
+*/
 mongoose.connect(MONGO_URL, { useNewUrlParser: true });
+
+app.use('*', cors(options));
 
 app.use(routes);
 
